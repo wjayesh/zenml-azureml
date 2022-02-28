@@ -39,7 +39,7 @@ cli_auth = AzureCliAuthentication()
 
 ws = Workspace.get(subscription_id="c45eb423-796b-4f55-8908-d081ae8ba3c9",
                resource_group="azureml",
-               workspace_name="zenml",
+               name="zenml",
                auth=cli_auth)
 
 # create an environment 
@@ -51,8 +51,8 @@ and scoring scripts. They also specify runtimes (Python, Spark, or Docker).
 """
 
 # From a pip requirements file
-pip_env = Environment.from_pip_requirements(name="pipenv",
-                                          file_path="path-to-zenml-requirements-file")
+# pip_env = Environment.from_pip_requirements(name="pipenv",
+                                          # file_path="path-to-zenml-requirements-file")
 
 # for our use-case, use the docker image option for the environment since our
 # image is already built with all the required packages.
