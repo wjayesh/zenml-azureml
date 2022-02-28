@@ -14,13 +14,13 @@ Input that the user needs to supply (as part of stack component registration)
 Authentication Options:
 - Have an authenticated az-cli client.
 
-We would already have the requirements file from the pipeline information and 
-from the stack requirements. Let this file be called `zenml-requirements.txt`
-
 
 Environments
 Curated envs: https://docs.microsoft.com/en-us/azure/machine-learning/resource-curated-environments
 Create your own: https://docs.microsoft.com/en-us/azure/machine-learning/how-to-use-environments
+
+We would already have the requirements file from the pipeline information and 
+from the stack requirements. Let this file be called `zenml-requirements.txt`
 """
 
 
@@ -37,9 +37,9 @@ Steps
 
 cli_auth = AzureCliAuthentication()
 
-ws = Workspace.get(subscription_id="my-subscription-id",
-               resource_group="my-ml-rg",
-               workspace_name="my-ml-workspace",
+ws = Workspace.get(subscription_id="c45eb423-796b-4f55-8908-d081ae8ba3c9",
+               resource_group="azureml",
+               workspace_name="zenml",
                auth=cli_auth)
 
 # create an environment 
@@ -69,7 +69,8 @@ Azure Machine Learning only supports Docker images that provide the following so
 """
 docker_image_name = '' # get fully qualified name from zenml
 # can add additional python layer using pip_requirements field
-docker_env = Environment.from_docker_image(name="dockerenv", image=docker_image_name)
+# docker_env = Environment.from_docker_image(name="dockerenv", image=docker_image_name)
+docker_env = Environment.from_docker_image(name="dockerenv", image='tensorflow/tensorflow:2.7.1')
 
 # register environment with workspace
 """
@@ -105,7 +106,8 @@ For ref, constructor for ComputeTarget is
 `ComputeTarget(workspace, name)`
 """
 compute_target_str = 'input-by-user'
-compute_target_obj = ComputeTarget(workspace=ws, name='input-by-user')
+# compute_target_obj = ComputeTarget(workspace=ws, name='input-by-user')
+compute_target_obj = ComputeTarget(workspace=ws, name='zenml-compute')
 
 
 # create a ScriptRunConfig
